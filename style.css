@@ -1,0 +1,295 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    /* font-family: 'Silkscreen', cursive; */
+    font-family: 'Calibri';
+}
+
+.global-area {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.left-area {
+    height: 100%;
+    flex: 0 0 250px;
+    background-image: linear-gradient(#17458f, #081933);
+    text-align: center;
+}
+
+.right-area {
+    height: 100%;
+    width: 100%;
+    padding: 40px;
+    background: linear-gradient(90deg, rgb(22, 22, 22) 0%, rgba(47,52,58,1) 4%, rgba(47,52,58,1) 100%);
+}
+
+.header-title {
+    color: silver;
+    margin: 20px auto 30px;
+    font-size: 1.5em;
+    text-align: center;
+    display: inline-block;
+}
+
+.result-box {
+    display: flex;
+    justify-content: center;
+    border-radius: 20px;
+    height: 120px;
+    width: 200px;
+    background-color: hsl(217, 73%, 19%);
+    /* for horizontal center position */
+    margin: 0px auto;
+    /* below for engrave box effect */
+    box-shadow: 2px 2px 2px rgba(55, 86, 136, 0.8),
+        inset 2px 2px 2px rgba(13, 31, 62, 0.8);
+}
+
+.result-grid {
+    margin: auto;
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 8px;
+}
+
+.notify {
+    color: silver;
+    text-align: left;
+    font-size: 1.5em;
+}
+
+.logo-box {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    height: 148px;
+    width: 100%px;
+    background-image: url(./logo.png);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #31363A;
+}
+
+.small {
+    height: 288px;
+    width: 288px;
+}
+
+.medium {
+    height: 512px;
+    width: 512px;
+}
+
+.hard {
+    height: 512px;
+    width: 960px;
+}
+
+.grid div {
+    height: 30px;
+    width: 30px;
+    text-align: center;
+    background-color: #73c7ff;
+    box-sizing: border-box;
+    border: solid 1px black;
+    border-radius: 3px;
+    cursor: pointer;
+    margin: 1px;
+    box-shadow: 0px -7px 10px -8px rgba(0, 0, 0, 0.45) inset,
+        7px 0px 10px -8px rgba(0, 0, 0, 0.45) inset,
+        0px 7px 10px -8px rgba(0, 0, 0, 0.45) inset,
+        -7px 0px 10px -8px rgba(0, 0, 0, 0.45) inset;
+}
+
+/* .grid div:hover {
+    background-color: rgb(224, 224, 224);
+} */
+
+.checked {
+    box-shadow: 0px -7px 10px -8px rgba(0, 0, 0, 0.45) inset,
+        7px 0px 10px -8px rgba(0, 0, 0, 0.45) inset,
+        0px 7px 10px -8px rgba(0, 0, 0, 0.45) inset,
+        -7px 0px 10px -8px rgba(0, 0, 0, 0.45) inset;
+    background-color: white !important;
+    cursor: default;
+    /* disabled hightlight */
+    /* If you want to implement it in very old browser-versions */
+    -webkit-user-select: none;
+    /* Chrome/Safari */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* IE10+ */
+    /* The rule below is not implemented in browsers yet */
+    -o-user-select: none;
+    /* The rule below is implemented in most browsers by now */
+    user-select: none;
+}
+
+.checked:hover {
+    cursor: default !important;
+}
+
+.flag {
+    line-height: 25px;
+}
+
+.block-bomb {
+    line-height: 28px;
+}
+
+.block-number {
+    line-height: 28px;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.boom {
+    background-color: red !important;
+}
+
+.false-flag {
+    background-color: red !important;
+    border: solid 1px grey !important;
+    line-height: 28px !important;
+}
+
+.color1 {
+    color: blue;
+}
+
+.color2 {
+    color: green;
+}
+
+.color3 {
+    color: red;
+}
+
+.color4 {
+    color: navy;
+}
+
+.color5 {
+    color: brown;
+}
+
+.color6 {
+    color: teal;
+}
+
+.color7 {
+    color: purple;
+}
+
+.color8 {
+    color: grey;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.6);
+    /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #126748;
+    margin: auto;
+    padding: 15px;
+    border: 1px solid #5a957f;
+    width: 50%;
+}
+
+.modal-content-header {
+    text-align: center;
+    color: white;
+    padding: 10px 0px;
+    font-size: 22px;
+}
+
+.modal-button-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.divButton {
+    display: block;
+    margin: 10px;
+    height: 120px;
+    width: 120px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    /* box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset; */
+    /* box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset; */
+    text-align: center;
+    display: flex;
+    cursor: pointer;
+
+    /* disabled hightlight */
+    /* If you want to implement it in very old browser-versions */
+    -webkit-user-select: none;
+    /* Chrome/Safari */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* IE10+ */
+    /* The rule below is not implemented in browsers yet */
+    -o-user-select: none;
+    /* The rule below is implemented in most browsers by now */
+    user-select: none;
+}
+
+/* transform scale on button click */
+.divButton:active {
+    transform: scale(0.96);
+    /* box-shadow: rgba(0, 0, 0, 0.19) 0px 9px 19px, rgba(0, 0, 0, 0.23) 0px 5px 5px; */
+}
+
+.buttonContent {
+    margin: auto;
+    font-size: 16px;
+}
+
+.button-level-small {
+    background-color: #67aa29;
+}
+
+.button-level-medium {
+    background-color: #cea810;
+}
+
+.button-level-hard {
+    background-color: #d2572d;
+}
