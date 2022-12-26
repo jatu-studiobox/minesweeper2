@@ -4,6 +4,9 @@ const loadGameArea = (gameType) => {
     const bombAmountMonitor = document.getElementById("bombAmountMonitor");
     const minutesTimer = document.getElementById("minutesTimer");
     const secondsTimer = document.getElementById("secondsTimer");
+    const modalResult = document.getElementById("modalResult");
+    const textResult = document.getElementById("textResult");
+    const btnViewResult = document.getElementById("btnViewResult");
 
     let width = 0;
     let height = 0;
@@ -28,7 +31,7 @@ const loadGameArea = (gameType) => {
             width = 9;
             height = 9;
             bombAmount = 10;
-            level = "small";
+            level = "easy";
             break;
     }
 
@@ -387,6 +390,8 @@ const loadGameArea = (gameType) => {
         console.log('BOOM! Game Over!');
         stopTimer();
         isGameOver = true;
+        setDisplayResult(false);
+        setDisplayModalResult(true);
 
         // show ALL the bombs
         squares.forEach(square => {
@@ -394,7 +399,7 @@ const loadGameArea = (gameType) => {
             if (square.classList.contains('bomb') && !square.classList.contains('flag')) {
                 square.classList.add('checked');
                 square.classList.add('block-bomb');
-                square.innerHTML = '💣';
+                // square.innerHTML = '💣';
             } else if (!square.classList.contains('bomb') && square.classList.contains('flag')) {
                 square.classList.add('false-flag');
             }
@@ -414,9 +419,49 @@ const loadGameArea = (gameType) => {
             if (matches == bombAmount) {
                 console.log("You WIN!");
                 stopTimer();
+                setDisplayResult(true);
+                setDisplayModalResult(true);
                 gameOver = true;
             }
         }
+    }
+
+    function setDisplayResult(isWin) {
+        textResult.className = "";
+        if (isWin) {
+            textResult.innerHTML = "Congratulations!";
+            textResult.classList.add("result-message-win");
+        } else {
+            textResult.innerHTML = "Better Luck Next Time!";
+            textResult.classList.add("result-message-lost");
+        }
+    }
+
+    function setDisplayModalResult(bValue) {
+        modalResult.style.display = bValue ? "block" : "none";
+    }
+
+    // Disabled right click on playing area
+    gridPlay.addEventListener('contextmenu', e => e.preventDefault());
+
+    btnViewResult.addEventListener('click', e => {
+        setDisplayModalResult(false);
+    });
+};
+
+const setHeaderTitle = (gameType) => {
+    const headerTitle = document.querySelector(".header-title");
+    // check game type for setting game dimemsion and bomb amount
+    switch (parseInt(gameType)) {
+        case 2: 
+            headerTitle.innerHTML = "Medium 16 x 16";
+            break;
+        case 3:
+            headerTitle.innerHTML = "Hard 30 x 16";
+            break;
+        default:
+            headerTitle.innerHTML = "Easy 9 x 9";
+            break;
     }
 };
 
@@ -425,9 +470,10 @@ const setDisplaySettingsModal = (bValue) => {
     modalSettings.style.display = bValue ? "block" : "none";
 };
 
-const setDisplayPlayingArea = (bValue) => {
-    const globalArea = document.querySelector(".global-area");
-    globalArea.style.display = bValue ? "block" : "none";
+const clearGameArea = () => {
+    console.log("Clear game area");
+    const gridPlay = document.getElementById("gridPlay");
+    gridPlay.innerHTML = "";
 };
 
 const bindGameTypeButton = () => {
@@ -435,7 +481,8 @@ const bindGameTypeButton = () => {
     btnList.forEach(btn => {
         btn.addEventListener('click', (e) => {
             setDisplaySettingsModal(false);
-            // setDisplayPlayingArea(true);
+            setHeaderTitle(btn.dataset.gameType);
+            clearGameArea();
             loadGameArea(btn.dataset.gameType);
         });
     });

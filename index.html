@@ -40,17 +40,30 @@
     <div id="modalSettings" class="modal">
         <div class="modal-content">
             <div class="modal-content-header">
-                Please Choose level
+                Please choose level
             </div>
             <div class="modal-button-list">
-                <div class="game-type-button button-level-small divButton" data-game-type="1">
+                <div class="game-type-button button-level-easy select-level-button" data-game-type="1">
                     <div class="buttonContent">Easy<br/>9x9<br/>10 bombs</div>
                 </div>
-                <div class="game-type-button button-level-medium divButton" data-game-type="2">
+                <div class="game-type-button button-level-medium select-level-button" data-game-type="2">
                     <div class="buttonContent">Medium<br/>16x16<br/>40 bombs</div>
                 </div>
-                <div class="game-type-button button-level-hard divButton" data-game-type="3">
+                <div class="game-type-button button-level-hard select-level-button" data-game-type="3">
                     <div class="buttonContent">Hard<br/>16x30<br/>99 bombs</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="modalResult">
+        <div class="modal-result">
+            <div id="textResult">result</div>
+            <div class="row-button-list">
+                <div class="button-item-result" id="btnNewGame">
+                    <div class="buttonContent">New game</div>
+                </div>
+                <div class="button-item-result" id="btnViewResult">
+                    <div class="buttonContent">View result</div>
                 </div>
             </div>
         </div>
