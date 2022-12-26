@@ -7,6 +7,8 @@ const loadGameArea = (gameType) => {
     const modalResult = document.getElementById("modalResult");
     const textResult = document.getElementById("textResult");
     const btnViewResult = document.getElementById("btnViewResult");
+    const btnNewGame = document.getElementById("btnNewGame");
+    const menu = document.querySelector(".menu");
 
     let width = 0;
     let height = 0;
@@ -447,6 +449,15 @@ const loadGameArea = (gameType) => {
     btnViewResult.addEventListener('click', e => {
         setDisplayModalResult(false);
     });
+
+    btnNewGame.addEventListener('click', e => {
+        setDisplayModalResult(false);
+        setDisplaySettingsModal(true);
+    });
+
+    menu.addEventListener('click', e => {
+        setDisplaySettingsModal(true);
+    });
 };
 
 const setHeaderTitle = (gameType) => {
@@ -473,6 +484,9 @@ const setDisplaySettingsModal = (bValue) => {
 const clearGameArea = () => {
     console.log("Clear game area");
     const gridPlay = document.getElementById("gridPlay");
+    gridPlay.classList.remove("easy");
+    gridPlay.classList.remove("medium");
+    gridPlay.classList.remove("hard");
     gridPlay.innerHTML = "";
 };
 
