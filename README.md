@@ -1,5 +1,10 @@
 # minesweeper2
-Upgrade from my existing minesweeper project
+Upgrade from my [minesweeper](https://github.com/jatu-studiobox/minesweeper) project.
 
+## Change & Enhance
+* Change design
+* Add game level selection
 
-https://jatu-studiobox.github.io/minesweeper2/
+## Go to play
+
+[Minesweeper 2](https://jatu-studiobox.github.io/minesweeper2/)
