@@ -3,6 +3,19 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
+
+    /* disabled hightlight */
+    /* If you want to implement it in very old browser-versions */
+    -webkit-user-select: none;
+    /* Chrome/Safari */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* IE10+ */
+    /* The rule below is not implemented in browsers yet */
+    -o-user-select: none;
+    /* The rule below is implemented in most browsers by now */
+    user-select: none;
 }
 
 body {
@@ -124,18 +137,6 @@ body {
         -7px 0px 10px -8px rgba(0, 0, 0, 0.45) inset;
     background-color: white !important;
     cursor: default;
-    /* disabled hightlight */
-    /* If you want to implement it in very old browser-versions */
-    -webkit-user-select: none;
-    /* Chrome/Safari */
-    -moz-user-select: none;
-    /* Firefox */
-    -ms-user-select: none;
-    /* IE10+ */
-    /* The rule below is not implemented in browsers yet */
-    -o-user-select: none;
-    /* The rule below is implemented in most browsers by now */
-    user-select: none;
 }
 
 .checked:hover {
@@ -356,18 +357,7 @@ body {
     display: flex;
     cursor: pointer;
 
-    /* disabled hightlight */
-    /* If you want to implement it in very old browser-versions */
-    -webkit-user-select: none;
-    /* Chrome/Safari */
-    -moz-user-select: none;
-    /* Firefox */
-    -ms-user-select: none;
-    /* IE10+ */
-    /* The rule below is not implemented in browsers yet */
-    -o-user-select: none;
-    /* The rule below is implemented in most browsers by now */
-    user-select: none;
+    
 }
 
 /* transform scale on button click */

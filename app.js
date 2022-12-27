@@ -1,15 +1,18 @@
-const loadGameArea = (gameType) => {
-    // Gathering element html
-    const gridPlay = document.getElementById("gridPlay");
-    const bombAmountMonitor = document.getElementById("bombAmountMonitor");
-    const minutesTimer = document.getElementById("minutesTimer");
-    const secondsTimer = document.getElementById("secondsTimer");
-    const modalResult = document.getElementById("modalResult");
-    const textResult = document.getElementById("textResult");
-    const btnViewResult = document.getElementById("btnViewResult");
-    const btnNewGame = document.getElementById("btnNewGame");
-    const menu = document.querySelector(".menu");
+// Html elements
+let minutesTimer = null;
+let secondsTimer = null;
+let gridPlay = null;
+let bombAmountMonitor = null;
+let modalResult = null;
+let textResult = null;
+let btnViewResult = null;
+let btnNewGame = null;
+let menu = null;
 
+let timeId;
+let totalSeconds = 0;
+
+const loadGameArea = (gameType) => {   
     let width = 0;
     let height = 0;
     let bombAmount = 0;
@@ -17,7 +20,7 @@ const loadGameArea = (gameType) => {
 
     // check game type for setting game dimemsion and bomb amount
     switch (parseInt(gameType)) {
-        case 2: 
+        case 2:
             width = 16;
             height = 16;
             bombAmount = 40;
@@ -55,9 +58,6 @@ const loadGameArea = (gameType) => {
     let isGameOver = false;
     let kickOff = true;
 
-    let totalSeconds = 0;
-    let timeId;
-
     // create Board
     function createBoard() {
         // get shuffled game array with random bombs
@@ -78,7 +78,11 @@ const loadGameArea = (gameType) => {
 
             // normal click
             square.addEventListener('click', (e) => {
-                startTrigger();
+                // check if kick off
+                if (kickOff) {
+                    kickOff = false;
+                    startTimer();
+                }
                 click(square);
             });
 
@@ -141,19 +145,9 @@ const loadGameArea = (gameType) => {
         // check if click off
         if (kickOff) {
             // start Timer
-            timeId = setInterval(startTimer, 1000);
+            timeId = setInterval(runTimer, 1000);
             kickOff = false;
         }
-    }
-
-    function startTimer() {
-        ++totalSeconds;
-        secondsTimer.innerHTML = String(totalSeconds % 60).padStart(2, '0');
-        minutesTimer.innerHTML = String(parseInt(totalSeconds / 60)).padStart(2, '0');
-    }
-
-    function stopTimer() {
-        clearInterval(timeId);
     }
 
     // for clear text selection
@@ -428,43 +422,53 @@ const loadGameArea = (gameType) => {
         }
     }
 
-    function setDisplayResult(isWin) {
-        textResult.className = "";
-        if (isWin) {
-            textResult.innerHTML = "Congratulations!";
-            textResult.classList.add("result-message-win");
-        } else {
-            textResult.innerHTML = "Better Luck Next Time!";
-            textResult.classList.add("result-message-lost");
-        }
-    }
-
-    function setDisplayModalResult(bValue) {
-        modalResult.style.display = bValue ? "block" : "none";
-    }
-
     // Disabled right click on playing area
     gridPlay.addEventListener('contextmenu', e => e.preventDefault());
-
-    btnViewResult.addEventListener('click', e => {
-        setDisplayModalResult(false);
-    });
-
-    btnNewGame.addEventListener('click', e => {
-        setDisplayModalResult(false);
-        setDisplaySettingsModal(true);
-    });
-
-    menu.addEventListener('click', e => {
-        setDisplaySettingsModal(true);
-    });
 };
 
-const setHeaderTitle = (gameType) => {
+const startTimer = () => {
+    // start Timer
+    console.log("start timer");
+    timeId = setInterval(runTimer, 1000);
+}
+
+const runTimer = () => {
+    ++totalSeconds;
+    secondsTimer.innerHTML = String(totalSeconds % 60).padStart(2, '0');
+    minutesTimer.innerHTML = String(parseInt(totalSeconds / 60)).padStart(2, '0');
+};
+
+const stopTimer = () => {
+    console.log("stop timer")
+    clearInterval(timeId);
+};
+
+const resetTimer = () => {
+    totalSeconds = 0;
+    secondsTimer.innerHTML = String(totalSeconds % 60).padStart(2, '0');
+    minutesTimer.innerHTML = String(parseInt(totalSeconds / 60)).padStart(2, '0');
+};
+
+const setDisplayResult = (isWin) => {
+    textResult.className = "";
+    if (isWin) {
+        textResult.innerHTML = "Congratulations!";
+        textResult.classList.add("result-message-win");
+    } else {
+        textResult.innerHTML = "Better Luck Next Time!";
+        textResult.classList.add("result-message-lost");
+    }
+};
+
+const setDisplayModalResult = (bValue) => {
+    modalResult.style.display = bValue ? "block" : "none";
+};
+
+const setHeaderTitle = (gameLevel) => {
     const headerTitle = document.querySelector(".header-title");
-    // check game type for setting game dimemsion and bomb amount
-    switch (parseInt(gameType)) {
-        case 2: 
+    // check game level for setting game dimemsion and bomb amount
+    switch (parseInt(gameLevel)) {
+        case 2:
             headerTitle.innerHTML = "Medium 16 x 16";
             break;
         case 3:
@@ -488,9 +492,11 @@ const clearGameArea = () => {
     gridPlay.classList.remove("medium");
     gridPlay.classList.remove("hard");
     gridPlay.innerHTML = "";
+    stopTimer();
+    resetTimer();
 };
 
-const bindGameTypeButton = () => {
+const bindGameLevelButton = () => {
     var btnList = document.querySelectorAll('.game-type-button');
     btnList.forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -502,10 +508,38 @@ const bindGameTypeButton = () => {
     });
 };
 
+// Gathering html elements
+const initElement = () => {
+    minutesTimer = document.getElementById("minutesTimer");
+    secondsTimer = document.getElementById("secondsTimer");
+    gridPlay = document.getElementById("gridPlay");
+    bombAmountMonitor = document.getElementById("bombAmountMonitor");
+    modalResult = document.getElementById("modalResult");
+    textResult = document.getElementById("textResult");
+    btnViewResult = document.getElementById("btnViewResult");
+    btnNewGame = document.getElementById("btnNewGame");
+    menu = document.querySelector(".menu");
+
+    btnViewResult.addEventListener('click', e => {
+        setDisplayModalResult(false);
+    });
+
+    btnNewGame.addEventListener('click', e => {
+        setDisplayModalResult(false);
+        setDisplaySettingsModal(true);
+    });
+
+    menu.addEventListener('click', e => {
+        setDisplaySettingsModal(true);
+    });
+};
+
 // DOMContentLoaded - all html files have loaded before reading javascript
 document.addEventListener("DOMContentLoaded", () => {
+    initElement();
+
     setDisplaySettingsModal(true);
 
     // bind Game Type selected button click
-    bindGameTypeButton();
+    bindGameLevelButton();
 });
